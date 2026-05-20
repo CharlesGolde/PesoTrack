@@ -69,26 +69,36 @@ class PesoTrackHandler(http.server.BaseHTTPRequestHandler):
         global current_total, transaction_history_html, category_report_html
         global savings_amount, savings_display, savings_class, savings_message
 
-        # 1. Load the data manager
+        # -----------------------------------------------------------------------------------
+        #                               1. Load the data manager
+        # -----------------------------------------------------------------------------------
         manager = FinanceManager(None, None)
         manager.load_from_csv()
 
-        # 2. Calculate totals
+        # -----------------------------------------------------------------------------------
+        #                                2. Calculate totals
+        # -----------------------------------------------------------------------------------
         current_total = manager.get_total_amount()
 
-        # 3. Create the HTML for the transaction list
+        # -----------------------------------------------------------------------------------
+        #                       3. Create the HTML for the transaction list
+        # -----------------------------------------------------------------------------------
         writer = WebOutputWriter()
         for t in manager._transactions:
             writer.write_report(t.to_dict())
         transaction_history_html = writer.get_html()
 
-        # 4. Create the HTML for the category report
+        # -----------------------------------------------------------------------------------
+        #                        4. Create the HTML for the category report
+        # -----------------------------------------------------------------------------------
         report_writer = WebOutputWriter()
         breakdown = manager.get_category_breakdown()
         report_writer.write_category_report(breakdown)
         category_report_html = report_writer.get_html()
 
-        # 5. Read the HTML file
+        # -----------------------------------------------------------------------------------
+        #                                   5. Read the HTML file
+        # -----------------------------------------------------------------------------------
         script_dir = os.path.dirname(os.path.abspath(__file__))
         try:
             # encoding="utf-8" ensures we read special characters correctly
@@ -98,7 +108,9 @@ class PesoTrackHandler(http.server.BaseHTTPRequestHandler):
             self.send_error(404, "index.html not found")
             return
 
-        # 6. Put the data into the HTML
+        # -----------------------------------------------------------------------------------
+        #                               6. Put the data into the HTML
+        # -----------------------------------------------------------------------------------
         html_content = html_content.replace("{{TOTAL_AMOUNT}}", f"{current_total:.2f}")
         html_content = html_content.replace("{{TRANSACTIONS}}", transaction_history_html)
         html_content = html_content.replace("{{CATEGORY_REPORT}}", category_report_html)
