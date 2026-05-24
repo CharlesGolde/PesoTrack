@@ -1,5 +1,10 @@
 # PesoTrack 💰
 
+[![Python](https://img.shields.io/badge/Python-83%25-3776ab?logo=python&logoColor=white)](https://www.python.org/)
+[![HTML](https://img.shields.io/badge/HTML-17%25-e34c26?logo=html5&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-Clarky--Masarap-blue?logo=github)](https://github.com/Clarky-Masarap)
+
 **License:** [MIT License](LICENSE)
 
 A lightweight, web-based personal finance tracker built with Python. Track your expenses, categorize spending, and calculate savings all in one place. Perfect for managing your finances in Philippine Pesos (₱).
